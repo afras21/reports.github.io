@@ -30,7 +30,7 @@ class Navbar extends Component {
           <ul className="navbar-nav navbar-nav-right">
             <Dropdown alignRight as="li" className="nav-item d-none d-lg-block">
                 <Dropdown.Toggle className="nav-link btn btn-success create-new-button no-caret">
-                + <Trans>Create New Project</Trans>
+                + <Trans>Create Complaint</Trans>
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className="navbar-dropdown preview-list create-new-dropdown-menu">
@@ -181,7 +181,7 @@ class Navbar extends Component {
               <Dropdown.Toggle as="a" className="nav-link cursor-pointer no-caret">
                 <div className="navbar-profile">
                   <img className="img-xs rounded-circle" src={require('../../assets/images/faces/face15.jpg')} alt="profile" />
-                  <p className="mb-0 d-none d-sm-block navbar-profile-name"><Trans>Henry Klein</Trans></p>
+                  <p className="mb-0 d-none d-sm-block navbar-profile-name"><Trans>Afras Ali</Trans></p>
                   <i className="mdi mdi-menu-down d-none d-sm-block"></i>
                 </div>
               </Dropdown.Toggle>
