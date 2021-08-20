@@ -6,7 +6,9 @@ import "./i18n";
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <BrowserRouter basename="/demo/corona-react-free/template/demo_1/preview">
+  <BrowserRouter 
+  // basename="/demo/corona-react-free/template/demo_1/preview"
+  >
     <App />
   </BrowserRouter>
 , document.getElementById('root'));
