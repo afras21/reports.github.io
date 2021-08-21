@@ -3,6 +3,7 @@ import { Doughnut } from 'react-chartjs-2';
 import Slider from "react-slick";
 import { TodoListComponent } from '../apps/TodoList'
 import { VectorMap } from "react-jvectormap"
+import { Line,Bar } from 'react-chartjs-2';
 
 const mapData = {
   "BZ": 75.00,
@@ -15,14 +16,97 @@ const mapData = {
 
 export class Dashboard extends Component {
 
-  transactionHistoryData =  {
-    labels: ["Paypal", "Stripe","Cash"],
+  data = {
+    labels: ["12:00", "1:00", "2:00", "3:00", "4:00", "5:00","6:00","7:00"],
     datasets: [{
-        data: [55, 25, 20],
-        backgroundColor: [
-          "#111111","#00d25b","#ffab00"
-        ]
+      label: '# of Votes',
+      data: [10, 19, 3, 5, 2, 3,-10,13],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+      ],
+      borderWidth: 1,
+      fill: false
+    }]
+};
+  detectionsData = {
+    labels: ["Jan","Feb","Mar","Apr","May", "Jun", "Jul", "Aug", "Sep", "Oct","Nov","Dec"],
+    datasets: [{
+      label: '# of Votes',
+      data: [12, 1, 6, 7, 22, 23,10,8,5,22,13,15],
+      backgroundColor: [
+        'rgba(255, 99, 132,1)',
+        'rgba(54, 162, 235,1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(255, 22, 64, 1)',
+        'rgba(255, 67, 22, 1)',
+        'rgba(255, 111, 22, 1)',
+        'rgba(255, 222, 22, 1)',
+        'rgba(34, 213, 22, 1)',
+        'rgba(34, 169, 22, 1)',
+      ],
+      borderColor: [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+      ],
+      borderWidth: 1,
+      fill: false
+    }]
+};
+
+options = {
+  scales: {
+    yAxes: [{
+      ticks: {
+        beginAtZero: true
+      },
+      gridLines: {
+        color: "rgba(204, 204, 204,0.1)"
       }
+    }],
+    xAxes: [{
+      gridLines: {
+        color: "rgba(204, 204, 204,0.1)"
+      }
+    }]
+  },
+  legend: {
+    display: false
+  },
+  elements: {
+    point: {
+      radius: 0
+    }
+  }
+}
+
+  transactionHistoryData = {
+    labels: ["Paypal", "Stripe", "Cash"],
+    datasets: [{
+      data: [55, 25, 20],
+      backgroundColor: [
+        "#111111", "#00d25b", "#ffab00"
+      ]
+    }
     ]
   };
 
@@ -33,9 +117,9 @@ export class Dashboard extends Component {
     cutoutPercentage: 70,
     elements: {
       arc: {
-          borderWidth: 0
+        borderWidth: 0
       }
-    },      
+    },
     legend: {
       display: false
     },
@@ -53,10 +137,110 @@ export class Dashboard extends Component {
   toggleProBanner() {
     document.querySelector('.proBanner').classList.toggle("hide");
   }
-  render () {
+  render() {
     return (
       <div>
         <div className="row">
+          <div className="col-sm-3 grid-margin">
+            <div className="card">
+              <div className="card-body">
+                <h5>Alerts</h5>
+                <div className="row">
+                  <div className="col-8 col-sm-12 col-xl-8 my-auto">
+                    <div className="d-flex d-sm-block d-md-flex align-items-center">
+                      <h2 className="mb-0">101</h2>
+                      <p className="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
+                    </div>
+                    <h6 className="text-muted font-weight-normal">11.38% Since last month</h6>
+                  </div>
+                  <div className="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                    <i className="icon-lg mdi mdi-alert text-danger ml-auto"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-3 grid-margin">
+            <div className="card">
+              <div className="card-body">
+                <h5>Men Overboard</h5>
+                <div className="row">
+                  <div className="col-8 col-sm-12 col-xl-8 my-auto">
+                    <div className="d-flex d-sm-block d-md-flex align-items-center">
+                      <h2 className="mb-0">12</h2>
+                      <p className="text-success ml-2 mb-0 font-weight-medium">+8.3%</p>
+                    </div>
+                    <h6 className="text-muted font-weight-normal"> 9.61% Since last month</h6>
+                  </div>
+                  <div className="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                    <i className="icon-lg mdi mdi-odnoklassniki text-primary ml-auto"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-3 grid-margin">
+            <div className="card">
+              <div className="card-body">
+                <h5>Slip or Fall</h5>
+                <div className="row">
+                  <div className="col-8 col-sm-12 col-xl-8 my-auto">
+                    <div className="d-flex d-sm-block d-md-flex align-items-center">
+                      <h2 className="mb-0">1</h2>
+                      <p className="text-danger ml-2 mb-0 font-weight-medium">-2.1% </p>
+                    </div>
+                    <h6 className="text-muted font-weight-normal">2.27% Since last month</h6>
+                  </div>
+                  <div className="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                    {/* <i className="icon-lg mdi mdi-monitor text-danger ml-auto"></i> */}
+                    <img width={80} height={90} src={require("../../assets/images/fall.png")}/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-3 grid-margin">
+            <div className="card">
+              <div className="card-body">
+                <h5>Helmet </h5>
+                <div className="row">
+                  <div className="col-8 col-sm-12 col-xl-8 my-auto">
+                    <div className="d-flex d-sm-block d-md-flex align-items-center">
+                      <h2 className="mb-0">18</h2>
+                      <p className="text-danger ml-2 mb-0 font-weight-medium">-2.1% </p>
+                    </div>
+                    <h6 className="text-muted font-weight-normal">2.27% Since last month</h6>
+                  </div>
+                  <div className="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                  
+                    <i className="icon-lg mdi mdi-football-helmet text-info ml-auto"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* <div className="col-sm-3 grid-margin">
+            <div className="card">
+              <div className="card-body">
+                <h5>Dress Code</h5>
+                <div className="row">
+                  <div className="col-8 col-sm-12 col-xl-8 my-auto">
+                    <div className="d-flex d-sm-block d-md-flex align-items-center">
+                      <h2 className="mb-0">11</h2>
+                      <p className="text-danger ml-2 mb-0 font-weight-medium">-2.1% </p>
+                    </div>
+                    <h6 className="text-muted font-weight-normal">2.27% Since last month</h6>
+                  </div>
+                  <div className="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                    <i className="icon-lg mdi mdi-monitor text-success ml-auto"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> */}
+        </div>
+
+        {/* <div className="row">
           <div className="col-xl-3 col-sm-6 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
@@ -138,11 +322,12 @@ export class Dashboard extends Component {
             </div>
           </div>
         </div>
+     */}
         <div className="row">
           <div className="col-12 grid-margin">
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Border breaches (Latest)</h4>
+                <h4 className="card-title">Line Crossing Details (Latest)</h4>
                 <div className="table-responsive">
                   <table className="table">
                     <thead>
@@ -155,13 +340,11 @@ export class Dashboard extends Component {
                             </label>
                           </div> */}
                         </th>
-                        <th> Client Name </th>
-                        <th> Order No </th>
-                        <th> Product Cost </th>
-                        <th> Project </th>
-                        <th> Payment Mode </th>
-                        <th> Start Date </th>
-                        <th> Payment Status </th>
+                        <th> S.NO </th>
+                        <th> Detection Type </th>
+                        <th> Image </th>
+                        <th> Location </th>
+                        <th> Date </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -175,18 +358,18 @@ export class Dashboard extends Component {
                           </div> */}
                         </td>
                         <td>
-                          <div className="d-flex">
-                            <img src={require('../../assets/images/faces/face1.jpg')} alt="face" />
-                            <span className="pl-2">Afras Ali</span>
-                          </div>
+                          1
                         </td>
-                        <td> 02312 </td>
-                        <td> $14,500 </td>
-                        <td> Dashboard </td>
-                        <td> Credit card </td>
-                        <td> 04 Dec 2019 </td>
                         <td>
-                          <div className="badge badge-outline-success">Approved</div>
+                          <div className="badge badge-danger">Line Crossing</div>
+                        </td>
+                        <td> <img className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://theplanetd.com/images/travelling-by-cargo-ship-bow.jpg"} /> </td>
+                        <td><i className="mdi mdi-camcorder"></i> &nbsp;Cam 2</td>
+                        <td> <p>10:33 AM</p>
+                          <p>13 Mar 2021</p>
+                        </td>
+                        <td>
+                          <div className="badge badge-primary">View</div>
                         </td>
                       </tr>
                       <tr>
@@ -199,18 +382,22 @@ export class Dashboard extends Component {
                           </div> */}
                         </td>
                         <td>
-                          <div className="d-flex">
+                          2
+                          {/* <div className="d-flex">
                             <img src={require('../../assets/images/faces/face2.jpg')} alt="face" />
                             <span className="pl-2">Estella Bryan</span>
-                          </div>
+                          </div> */}
                         </td>
-                        <td> 02312 </td>
-                        <td> $14,500 </td>
-                        <td> Website </td>
-                        <td> Cash on delivered </td>
-                        <td> 04 Dec 2019 </td>
                         <td>
-                          <div className="badge badge-outline-warning">Pending</div>
+                          <div className="badge badge-danger">Line Crossing</div>
+                        </td>
+                        <td> <img className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://i0.wp.com/asiatimes.com/wp-content/uploads/2019/10/Sabiti-Iranian-tanker-e1570863718332.jpg?fit=1200%2C905&ssl=1"} /> </td>
+                        <td><i className="mdi mdi-camcorder"></i> &nbsp;Cam 23</td>
+                        <td> <p>10:33 AM</p>
+                          <p>12 Mar 2021</p>
+                        </td>
+                        <td>
+                          <div className="badge badge-primary">View</div>
                         </td>
                       </tr>
                       <tr>
@@ -223,18 +410,22 @@ export class Dashboard extends Component {
                           </div> */}
                         </td>
                         <td>
-                          <div className="d-flex">
+                          3
+                          {/* <div className="d-flex">
                             <img src={require('../../assets/images/faces/face5.jpg')} alt="face" />
                             <span className="pl-2">Lucy Abbott</span>
-                          </div>
+                          </div> */}
                         </td>
-                        <td> 02312 </td>
-                        <td> $14,500 </td>
-                        <td> App design </td>
-                        <td> Credit card </td>
-                        <td> 04 Dec 2019 </td>
                         <td>
-                          <div className="badge badge-outline-danger">Rejected</div>
+                          <div className="badge badge-danger">Line Crossing</div>
+                        </td>
+                        <td> <img className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://www.marineinsight.com/wp-content/uploads/2015/11/tanker.jpg"} /> </td>
+                        <td><i className="mdi mdi-camcorder"></i> &nbsp;Cam 11</td>
+                        <td> <p>1:13 AM</p>
+                          <p>12 Mar 2021</p>
+                        </td>
+                        <td>
+                          <div className="badge badge-primary">View</div>
                         </td>
                       </tr>
                       <tr>
@@ -247,18 +438,22 @@ export class Dashboard extends Component {
                           </div> */}
                         </td>
                         <td>
-                          <div className="d-flex">
+                          4
+                          {/* <div className="d-flex">
                             <img src={require('../../assets/images/faces/face3.jpg')} alt="face" />
                             <span className="pl-2">Peter Gill</span>
-                          </div>
+                          </div> */}
                         </td>
-                        <td> 02312 </td>
-                        <td> $14,500 </td>
-                        <td> Development </td>
-                        <td> Online Payment </td>
-                        <td> 04 Dec 2019 </td>
                         <td>
-                          <div className="badge badge-outline-success">Approved</div>
+                          <div className="badge badge-danger">Line Crossing</div>
+                        </td>
+                        <td> <img className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://static01.nyt.com/images/2019/10/29/world/00seafarers-clip-promo/merlin_158889435_75be49ec-d41e-4f2c-93ce-4310f84575be-superJumbo.jpg"} /> </td>
+                        <td><i className="mdi mdi-camcorder"></i>&nbsp; Cam 7</td>
+                        <td> <p>5:33 AM</p>
+                          <p>14 Mar 2021</p>
+                        </td>
+                        <td>
+                          <div className="badge badge-primary">View</div>
                         </td>
                       </tr>
                       <tr>
@@ -270,19 +465,22 @@ export class Dashboard extends Component {
                             </label>
                           </div> */}
                         </td>
-                        <td>
-                          <div className="d-flex">
+                        <td>5
+                          {/* <div className="d-flex">
                             <img src={require('../../assets/images/faces/face4.jpg')} alt="face" />
                             <span className="pl-2">Sallie Reyes</span>
-                          </div>
+                          </div> */}
                         </td>
-                        <td> 02312 </td>
-                        <td> $14,500 </td>
-                        <td> Website </td>
-                        <td> Credit card </td>
-                        <td> 04 Dec 2019 </td>
                         <td>
-                          <div className="badge badge-outline-success">Approved</div>
+                          <div className="badge badge-danger">Line Crossing</div>
+                        </td>
+                        <td> <img className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTawjmyO3VHMWpXmo2Rs1O8ZAe-z83fX203UA&usqp=CAU"} /> </td>
+                        <td><i className="mdi mdi-camcorder"></i> &nbsp; Cam 8</td>
+                        <td> <p>10:33 AM</p>
+                          <p>04 Apr 2020</p>
+                        </td>
+                        <td>
+                          <div className="badge badge-primary">View</div>
                         </td>
                       </tr>
                     </tbody>
@@ -291,7 +489,7 @@ export class Dashboard extends Component {
               </div>
             </div>
           </div>
-       
+
           {/* <div className="col-md-4 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
@@ -428,276 +626,258 @@ export class Dashboard extends Component {
           </div>
         */}
         </div>
-        
-        
-        <div className="row">
-          <div className="col-sm-4 grid-margin">
-            <div className="card">
-              <div className="card-body">
-                <h5>Revenue</h5>
-                <div className="row">
-                  <div className="col-8 col-sm-12 col-xl-8 my-auto">
-                    <div className="d-flex d-sm-block d-md-flex align-items-center">
-                      <h2 className="mb-0">$32123</h2>
-                      <p className="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
-                    </div>
-                    <h6 className="text-muted font-weight-normal">11.38% Since last month</h6>
-                  </div>
-                  <div className="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                    <i className="icon-lg mdi mdi-codepen text-primary ml-auto"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-sm-4 grid-margin">
-            <div className="card">
-              <div className="card-body">
-                <h5>Sales</h5>
-                <div className="row">
-                  <div className="col-8 col-sm-12 col-xl-8 my-auto">
-                    <div className="d-flex d-sm-block d-md-flex align-items-center">
-                      <h2 className="mb-0">$45850</h2>
-                      <p className="text-success ml-2 mb-0 font-weight-medium">+8.3%</p>
-                    </div>
-                    <h6 className="text-muted font-weight-normal"> 9.61% Since last month</h6>
-                  </div>
-                  <div className="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                    <i className="icon-lg mdi mdi-wallet-travel text-danger ml-auto"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-sm-4 grid-margin">
-            <div className="card">
-              <div className="card-body">
-                <h5>Purchase</h5>
-                <div className="row">
-                  <div className="col-8 col-sm-12 col-xl-8 my-auto">
-                    <div className="d-flex d-sm-block d-md-flex align-items-center">
-                      <h2 className="mb-0">$2039</h2>
-                      <p className="text-danger ml-2 mb-0 font-weight-medium">-2.1% </p>
-                    </div>
-                    <h6 className="text-muted font-weight-normal">2.27% Since last month</h6>
-                  </div>
-                  <div className="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                    <i className="icon-lg mdi mdi-monitor text-success ml-auto"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
+
 
         <div className="row">
-          <div className="col-md-6 col-xl-4 grid-margin stretch-card">
+          <div className="col-md-12 col-xl-12 grid-margin stretch-card">
             <div className="card">
-              <div className="card-body">
-                <div className="d-flex flex-row justify-content-between">
-                  <h4 className="card-title">Messages</h4>
-                  <p className="text-muted mb-1 small">View all</p>
-                </div>
-                <div className="preview-list">
-                  <div className="preview-item border-bottom">
-                    <div className="preview-thumbnail">
-                      <img src={require('../../assets/images/faces/face6.jpg')} alt="face" className="rounded-circle" />
-                    </div>
-                    <div className="preview-item-content d-flex flex-grow">
-                      <div className="flex-grow">
-                        <div className="d-flex d-md-block d-xl-flex justify-content-between">
-                          <h6 className="preview-subject">Leonard</h6>
-                          <p className="text-muted text-small">5 minutes ago</p>
-                        </div>
-                        <p className="text-muted">Well, it seems to be working now.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="preview-item border-bottom">
-                    <div className="preview-thumbnail">
-                      <img src={require('../../assets/images/faces/face8.jpg')} alt="face" className="rounded-circle" />
-                    </div>
-                    <div className="preview-item-content d-flex flex-grow">
-                      <div className="flex-grow">
-                        <div className="d-flex d-md-block d-xl-flex justify-content-between">
-                          <h6 className="preview-subject">Luella Mills</h6>
-                          <p className="text-muted text-small">10 Minutes Ago</p>
-                        </div>
-                        <p className="text-muted">Well, it seems to be working now.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="preview-item border-bottom">
-                    <div className="preview-thumbnail">
-                      <img src={require('../../assets/images/faces/face9.jpg')} alt="face" className="rounded-circle" />
-                    </div>
-                    <div className="preview-item-content d-flex flex-grow">
-                      <div className="flex-grow">
-                        <div className="d-flex d-md-block d-xl-flex justify-content-between">
-                          <h6 className="preview-subject">Ethel Kelly</h6>
-                          <p className="text-muted text-small">2 Hours Ago</p>
-                        </div>
-                        <p className="text-muted">Please review the tickets</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="preview-item border-bottom">
-                    <div className="preview-thumbnail">
-                      <img src={require('../../assets/images/faces/face11.jpg')} alt="face" className="rounded-circle" />
-                    </div>
-                    <div className="preview-item-content d-flex flex-grow">
-                      <div className="flex-grow">
-                        <div className="d-flex d-md-block d-xl-flex justify-content-between">
-                          <h6 className="preview-subject">Herman May</h6>
-                          <p className="text-muted text-small">4 Hours Ago</p>
-                        </div>
-                        <p className="text-muted">Thanks a lot. It was easy to fix it .</p>
-                      </div>
-                    </div>
-                  </div>
+              <div className="card-body" >
+              <h4 className="card-title">Critical Swell Levels Detections</h4>
+                <div className="d-flex flex-row " >
+                <Line  data={this.data} options={this.options} height={40} />
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-md-6 col-xl-4 grid-margin stretch-card">
+          </div>
+
+        <div className="row">
+          <div className="col-md-6 col-xl-6 grid-margin stretch-card">
             <div className="card">
-              <div className="card-body">
-                <h4 className="card-title">Portfolio Slide</h4>
-                <Slider className="portfolio-slider" {...this.sliderSettings}>
-                  <div className="item">
-                    <img src={require('../../assets/images/dashboard/Rectangle.jpg')} alt="carousel-item" />
+              <div className="card-body" >
+              <h4 className="card-title">Monthly Total Alerts</h4>
+                <div className="d-flex flex-row " >
+                <Bar  data={this.detectionsData} options={this.options} height={100} />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6 col-xl-6 grid-margin stretch-card">
+            <div className="card">
+              <div className="card-body" >
+                <h4 className="card-title">Monthly line crossing detections</h4>
+                <div className="d-flex flex-row " >
+                <Line  data={this.detectionsData} options={this.options} height={100} />
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          {/* <div className="row">
+            <div className="col-md-6 col-xl-4 grid-margin stretch-card">
+              <div className="card">
+                <div className="card-body">
+                  <div className="d-flex flex-row justify-content-between">
+                    <h4 className="card-title">Messages</h4>
+                    <p className="text-muted mb-1 small">View all</p>
                   </div>
-                  <div className="item">
-                    <img src={require('../../assets/images/dashboard/Img_5.jpg')} alt="carousel-item" />
-                  </div>
-                  <div className="item">
-                    <img src={require('../../assets/images/dashboard/img_6.jpg')} alt="carousel-item" />
-                  </div>
-                </Slider>
-                <div className="d-flex py-4">
-                  <div className="preview-list w-100">
-                    <div className="preview-item p-0">
+                  <div className="preview-list">
+                    <div className="preview-item border-bottom">
                       <div className="preview-thumbnail">
-                        <img src={require('../../assets/images/faces/face12.jpg')} className="rounded-circle" alt="face" />
+                        <img src={require('../../assets/images/faces/face6.jpg')} alt="face" className="rounded-circle" />
                       </div>
                       <div className="preview-item-content d-flex flex-grow">
                         <div className="flex-grow">
                           <div className="d-flex d-md-block d-xl-flex justify-content-between">
-                            <h6 className="preview-subject">CeeCee Bass</h6>
-                            <p className="text-muted text-small">4 Hours Ago</p>
+                            <h6 className="preview-subject">Leonard</h6>
+                            <p className="text-muted text-small">5 minutes ago</p>
                           </div>
                           <p className="text-muted">Well, it seems to be working now.</p>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <p className="text-muted">Well, it seems to be working now. </p>
-                <div className="progress progress-md portfolio-progress">
-                  <div className="progress-bar bg-success" role="progressbar" style={{width: '50%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-12 col-xl-4 grid-margin stretch-card">
-            <div className="card">
-              <div className="card-body">
-                <h4 className="card-title">To do list</h4>
-                <TodoListComponent />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12">
-            <div className="card">
-              <div className="card-body">
-                <h4 className="card-title">Visitors by Countries</h4>
-                <div className="row">
-                  <div className="col-md-5">
-                    <div className="table-responsive">
-                      <table className="table">
-                        <tbody>
-                          <tr>
-                            <td>
-                              <i className="flag-icon flag-icon-us"></i>
-                            </td>
-                            <td>USA</td>
-                            <td className="text-right"> 1500 </td>
-                            <td className="text-right font-weight-medium"> 56.35% </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <i className="flag-icon flag-icon-de"></i>
-                            </td>
-                            <td>Germany</td>
-                            <td className="text-right"> 800 </td>
-                            <td className="text-right font-weight-medium"> 33.25% </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <i className="flag-icon flag-icon-au"></i>
-                            </td>
-                            <td>Australia</td>
-                            <td className="text-right"> 760 </td>
-                            <td className="text-right font-weight-medium"> 15.45% </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <i className="flag-icon flag-icon-gb"></i>
-                            </td>
-                            <td>United Kingdom</td>
-                            <td className="text-right"> 450 </td>
-                            <td className="text-right font-weight-medium"> 25.00% </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <i className="flag-icon flag-icon-ro"></i>
-                            </td>
-                            <td>Romania</td>
-                            <td className="text-right"> 620 </td>
-                            <td className="text-right font-weight-medium"> 10.25% </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <i className="flag-icon flag-icon-br"></i>
-                            </td>
-                            <td>Brasil</td>
-                            <td className="text-right"> 230 </td>
-                            <td className="text-right font-weight-medium"> 75.00% </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                    <div className="preview-item border-bottom">
+                      <div className="preview-thumbnail">
+                        <img src={require('../../assets/images/faces/face8.jpg')} alt="face" className="rounded-circle" />
+                      </div>
+                      <div className="preview-item-content d-flex flex-grow">
+                        <div className="flex-grow">
+                          <div className="d-flex d-md-block d-xl-flex justify-content-between">
+                            <h6 className="preview-subject">Luella Mills</h6>
+                            <p className="text-muted text-small">10 Minutes Ago</p>
+                          </div>
+                          <p className="text-muted">Well, it seems to be working now.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="preview-item border-bottom">
+                      <div className="preview-thumbnail">
+                        <img src={require('../../assets/images/faces/face9.jpg')} alt="face" className="rounded-circle" />
+                      </div>
+                      <div className="preview-item-content d-flex flex-grow">
+                        <div className="flex-grow">
+                          <div className="d-flex d-md-block d-xl-flex justify-content-between">
+                            <h6 className="preview-subject">Ethel Kelly</h6>
+                            <p className="text-muted text-small">2 Hours Ago</p>
+                          </div>
+                          <p className="text-muted">Please review the tickets</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="preview-item border-bottom">
+                      <div className="preview-thumbnail">
+                        <img src={require('../../assets/images/faces/face11.jpg')} alt="face" className="rounded-circle" />
+                      </div>
+                      <div className="preview-item-content d-flex flex-grow">
+                        <div className="flex-grow">
+                          <div className="d-flex d-md-block d-xl-flex justify-content-between">
+                            <h6 className="preview-subject">Herman May</h6>
+                            <p className="text-muted text-small">4 Hours Ago</p>
+                          </div>
+                          <p className="text-muted">Thanks a lot. It was easy to fix it .</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div className="col-md-7">
-                    <div id="audience-map" className="vector-map"></div>
-                    <VectorMap
-                    map={"world_mill"}
-                    backgroundColor="transparent" //change it to ocean blue: #0077be
-                    panOnDrag={true}
-                    containerClassName="dashboard-vector-map"
-                    focusOn= { {
-                      x: 0.5,
-                      y: 0.5,
-                      scale: 1,
-                      animate: true
-                    }}
-                    series={{
-                      regions: [{
-                        scale: ['#3d3c3c', '#f2f2f2'],
-                        normalizeFunction: 'polynomial',
-                        values: mapData
-                      }]
-                    }}
-                  />
+                </div>
+              </div>
+            </div>
+            <div className="col-md-6 col-xl-4 grid-margin stretch-card">
+              <div className="card">
+                <div className="card-body">
+                  <h4 className="card-title">Portfolio Slide</h4>
+                  <Slider className="portfolio-slider" {...this.sliderSettings}>
+                    <div className="item">
+                      <img src={require('../../assets/images/dashboard/Rectangle.jpg')} alt="carousel-item" />
+                    </div>
+                    <div className="item">
+                      <img src={require('../../assets/images/dashboard/Img_5.jpg')} alt="carousel-item" />
+                    </div>
+                    <div className="item">
+                      <img src={require('../../assets/images/dashboard/img_6.jpg')} alt="carousel-item" />
+                    </div>
+                  </Slider>
+                  <div className="d-flex py-4">
+                    <div className="preview-list w-100">
+                      <div className="preview-item p-0">
+                        <div className="preview-thumbnail">
+                          <img src={require('../../assets/images/faces/face12.jpg')} className="rounded-circle" alt="face" />
+                        </div>
+                        <div className="preview-item-content d-flex flex-grow">
+                          <div className="flex-grow">
+                            <div className="d-flex d-md-block d-xl-flex justify-content-between">
+                              <h6 className="preview-subject">CeeCee Bass</h6>
+                              <p className="text-muted text-small">4 Hours Ago</p>
+                            </div>
+                            <p className="text-muted">Well, it seems to be working now.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-muted">Well, it seems to be working now. </p>
+                  <div className="progress progress-md portfolio-progress">
+                    <div className="progress-bar bg-success" role="progressbar" style={{ width: '50%' }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-12 col-xl-4 grid-margin stretch-card">
+              <div className="card">
+                <div className="card-body">
+                  <h4 className="card-title">To do list</h4>
+                  <TodoListComponent />
+                </div>
+              </div>
+            </div>
+          </div> */}
+          <div className="row">
+            <div className="col-12">
+              <div className="card">
+                <div className="card-body">
+                  <h4 className="card-title">Active vessels</h4>
+                  <div className="row">
+                    <div className="col-md-5">
+                      <div className="table-responsive">
+                        <table className="table">
+                          <tbody>
+                            <tr>
+                              <th>Name</th>
+                              <th>Country</th>
+                              <th>Range</th>
+                              <th>Accuracy</th>
+                            </tr>
+                            <tr>
+                              <td>
+                                Scottya Prince
+                              </td>
+                              <td>USA</td>
+                              <td className="text-right"> 1500 </td>
+                              <td className="text-right font-weight-medium"> 56.35% </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                Metaberg 235
+                              </td>
+                              <td>Germany</td>
+                              <td className="text-right"> 800 </td>
+                              <td className="text-right font-weight-medium"> 33.25% </td>
+                            </tr>
+                            <tr>
+                              <td>GNM 336
+                              </td>
+                              <td>Australia</td>
+                              <td className="text-right"> 760 </td>
+                              <td className="text-right font-weight-medium"> 15.45% </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                Mercury SF3
+                              </td>
+                              <td>United Kingdom</td>
+                              <td className="text-right"> 450 </td>
+                              <td className="text-right font-weight-medium"> 25.00% </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                Cargo nation SFSR
+                              </td>
+                              <td>Romania</td>
+                              <td className="text-right"> 620 </td>
+                              <td className="text-right font-weight-medium"> 10.25% </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                Bobra casstle 01
+                              </td>
+                              <td>Brasil</td>
+                              <td className="text-right"> 230 </td>
+                              <td className="text-right font-weight-medium"> 75.00% </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div className="col-md-7">
+                      <div id="audience-map" className="vector-map"></div>
+                      <VectorMap
+                        map={"world_mill"}
+                        backgroundColor="transparent" //change it to ocean blue: #0077be
+                        panOnDrag={true}
+                        containerClassName="dashboard-vector-map"
+                        focusOn={{
+                          x: 0.5,
+                          y: 0.5,
+                          scale: 1,
+                          animate: true
+                        }}
+                        series={{
+                          regions: [{
+                            scale: ['#3d3c3c', '#f2f2f2'],
+                            normalizeFunction: 'polynomial',
+                            values: mapData
+                          }]
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div> 
+        </div> 
     );
   }
 }
