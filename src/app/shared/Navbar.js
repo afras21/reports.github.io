@@ -30,7 +30,7 @@ class Navbar extends Component {
           <ul className="navbar-nav navbar-nav-right">
             <Dropdown alignRight as="li" className="nav-item d-none d-lg-block">
                 <Dropdown.Toggle className="nav-link btn btn-danger create-new-button no-caret">
-                + <Trans>Emerency</Trans>
+                + <Trans>Emergency</Trans>
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className="navbar-dropdown preview-list create-new-dropdown-menu">
