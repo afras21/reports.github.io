@@ -3,7 +3,7 @@ import { Doughnut } from 'react-chartjs-2';
 import Slider from "react-slick";
 import { TodoListComponent } from '../apps/TodoList'
 import { VectorMap } from "react-jvectormap"
-import { Line,Bar } from 'react-chartjs-2';
+import { Line, Bar } from 'react-chartjs-2';
 
 const mapData = {
   "BZ": 75.00,
@@ -17,35 +17,30 @@ const mapData = {
 export class Dashboard extends Component {
 
   data = {
-    labels: ["12:00", "1:00", "2:00", "3:00", "4:00", "5:00","6:00","7:00"],
+    labels: ["", "", "", "", "", "", "", ""],
     datasets: [{
-      label: '# of Votes',
-      data: [10, 19, 3, 5, 2, 3,-10,13],
+      label: 'ADNOC 212',
+      data: [100, 190, -120, 150, 270, 230, -100, 130,-300,400],
       backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255,99,132,1)',
+        'rgba(255, 99, 132, 1)',
         'rgba(54, 162, 235, 1)',
         'rgba(255, 206, 86, 1)',
         'rgba(75, 192, 192, 1)',
         'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
+        'rgba(255, 159, 64, 1)',
+        'rgba(111, 34, 64, 1)',
+        'rgba(243, 34, 64, 1)',
       ],
+      
       borderWidth: 1,
       fill: false
     }]
-};
+  };
   detectionsData = {
-    labels: ["Jan","Feb","Mar","Apr","May", "Jun", "Jul", "Aug", "Sep", "Oct","Nov","Dec"],
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [{
       label: '# of Votes',
-      data: [12, 1, 6, 7, 22, 23,10,8,5,22,13,15],
+      data: [12, 1, 6, 7, 22, 23, 10, 8, 5, 22, 13, 15],
       backgroundColor: [
         'rgba(255, 99, 132,1)',
         'rgba(54, 162, 235,1)',
@@ -71,33 +66,33 @@ export class Dashboard extends Component {
       borderWidth: 1,
       fill: false
     }]
-};
+  };
 
-options = {
-  scales: {
-    yAxes: [{
-      ticks: {
-        beginAtZero: true
-      },
-      gridLines: {
-        color: "rgba(204, 204, 204,0.1)"
+  options = {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        },
+        gridLines: {
+          color: "rgba(204, 204, 204,0.1)"
+        }
+      }],
+      xAxes: [{
+        gridLines: {
+          color: "rgba(204, 204, 204,0.1)"
+        }
+      }]
+    },
+    legend: {
+      display: false
+    },
+    elements: {
+      point: {
+        radius: 0
       }
-    }],
-    xAxes: [{
-      gridLines: {
-        color: "rgba(204, 204, 204,0.1)"
-      }
-    }]
-  },
-  legend: {
-    display: false
-  },
-  elements: {
-    point: {
-      radius: 0
     }
   }
-}
 
   transactionHistoryData = {
     labels: ["Paypal", "Stripe", "Cash"],
@@ -193,7 +188,7 @@ options = {
                   </div>
                   <div className="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
                     {/* <i className="icon-lg mdi mdi-monitor text-danger ml-auto"></i> */}
-                    <img width={80} height={90} src={require("../../assets/images/fall.png")}/>
+                    <img width={80} height={90} src={require("../../assets/images/fall.png")} />
                   </div>
                 </div>
               </div>
@@ -212,7 +207,7 @@ options = {
                     <h6 className="text-muted font-weight-normal">2.27% Since last month</h6>
                   </div>
                   <div className="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                  
+
                     <i className="icon-lg mdi mdi-football-helmet text-info ml-auto"></i>
                   </div>
                 </div>
@@ -323,6 +318,135 @@ options = {
           </div>
         </div>
      */}
+
+        <div className="row">
+          <div className="col-md-7 col-xl-7 grid-margin stretch-card">
+            <div className="card">
+              <div className="card-body" >
+                <h4 className="card-title">PPE Detections</h4>
+
+                <div className="row">
+                  <div style={{ fontWeight: 600 }} className="col-md-5 col-xl-5 grid-margin">
+                    <p style={{ marginLeft: "20px" }}>Uniform</p>
+                    <p style={{ marginLeft: "20px" }}>Life Jackets</p>
+                    <button type="button" className="btn btn-outline-success" style={{ color: "#fff", marginLeft: "20px" }}>
+                      Helmets
+                  </button>
+                    <div style={{ backgroundColor: "#4d4d4d", marginTop: "5vh", padding: "20px", display: "flex", borderRadius: "6px" }}>
+                      <div style={{ width: "70%" }}>
+                        <p style={{ fontSize: 20, color: "#d1d1d1" }}>Violations</p>
+                        <p style={{ marginTop: "-2vh", color: "#d1d1d1" }}>Total</p>
+                      </div>
+                      <div>
+                        <p style={{ fontSize: 50 }}>07</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="col-md-4 col-xl-4 grid-margin" style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
+                    <img width={200} src={require("../../assets/images/helmet.png")} />
+                  </div>
+                  <div className="col-md-3 col-xl-3 grid-margin">
+                    <h3 >Helmet Violations</h3> <br />
+                    <h5 >Time</h5>
+                    <p style={{ color: "#d3d3d3" }}>11:34 AM</p>
+                    <h5 >Date</h5>
+                    <p style={{ color: "#d3d3d3" }}>24/03/2021</p>
+                    <h5 >No of Violations</h5>
+                    <h4 style={{ color: "#d3d3d3" }}>04</h4>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-5 col-xl-5 grid-margin stretch-card">
+            <div className="card">
+              <div className="card-body" >
+                <h4 className="card-title">Critical Swell Level Detections</h4>
+                <div className="d-flex flex-row " >
+                  <Bar data={this.data} options={this.options} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-12 grid-margin">
+            <div className="card">
+              <div className="card-body">
+                <div style={{position:"relative",display:"flex"}}>
+                <h4 className="card-title">Highest Violations</h4>
+                <div style={{position:"absolute",right:0,display:"flex"}}>
+                <p style={{margin:"0 10px",padding:"5px"}}>Today</p>
+                <p style={{margin:"0 10px",padding:"5px"}}>Month</p>
+                <p style={{margin:"0 10px",padding:"5px"}}>Year</p>
+                <p style={{margin:"0 10px",backgroundColor:"whitesmoke",padding:"5px",color:"#000",borderRadius:"6px"}}>Today :Jul 24</p>
+                </div>
+                </div>
+                <div className="row" style={{paddingTop:"4vh"}}> 
+                <div className="col-md-1 col-xl-1 grid-margin stretch-card" style={{padding:"20px",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                  <i className="mdi mdi-arrow-left" style={{fontSize:40}} ></i>
+                  </div>
+                <div className="col-md-2 col-xl-2 grid-margin stretch-card" style={{alignItems:"center",justifyContent:"center",alignContent:"center",paddingTop:"5vh"}}>
+                     <div style={{display:"flex",flexDirection:"column",alignContent:"center",alignItems:"center",width:"100%",backgroundColor:"#4d4d4d",borderRadius:"5px"}}>
+                     <img alt="ship" 
+                      width={150} height={105} style={{borderRadius:"48px",border:"3px solid #fff",position:"absolute",top:"-6%"}}
+                      src={"https://www.wqis.com/wp-content/uploads/2020/07/Cargo-Shipping-Industry.jpg" } />
+                      
+                      <h4 style={{textAlign:"center",marginTop:"10vh"}}>ADH0C 323	</h4>
+                      <h4 style={{textAlign:"center",color:"#8d8d8d",paddingBottom:"2vh"}}>Total Violations: 12	</h4>
+                     
+                     </div>
+                </div>
+                <div className="col-md-2 col-xl-2 grid-margin stretch-card" style={{paddingTop:"5vh"}}>
+                     <div style={{display:"flex",flexDirection:"column",alignContent:"center",alignItems:"center",width:"100%",backgroundColor:"#4d4d4d",borderRadius:"5px"}}>
+                     <img alt="ship" 
+                      width={150} height={105} style={{borderRadius:"48px",border:"3px solid #fff",position:"absolute",top:"-6%"}}
+                      src={"https://images.theconversation.com/files/392892/original/file-20210331-15-18mw6wt.jpeg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=675.0&fit=crop" } />
+                      
+                      <h4 style={{textAlign:"center",marginTop:"10vh"}}>ADH0C 323	</h4>
+                      <h4 style={{textAlign:"center",color:"#8d8d8d",paddingBottom:"2vh"}}>Total Violations: 12	</h4>
+                     
+                     </div>
+                </div>
+                <div className="col-md-2 col-xl-2 grid-margin stretch-card" style={{paddingTop:"5vh"}}>
+                     <div style={{display:"flex",flexDirection:"column",alignContent:"center",alignItems:"center",width:"100%",backgroundColor:"#4d4d4d",borderRadius:"5px"}}>
+                     <img alt="ship" 
+                      width={150} height={105} style={{borderRadius:"48px",border:"3px solid #fff",position:"absolute",top:"-6%"}}
+                      src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZbWWW0L0mSjeggLBO5wQRpe-V9PWYxUCsPFi6m0HUi9NnjwxNb5u5sXO2psqXSfJlbIQ&usqp=CAU" } />
+                      <h4 style={{textAlign:"center",marginTop:"10vh"}}>ADNOC 336</h4>
+                      <h4 style={{textAlign:"center",color:"#8d8d8d",paddingBottom:"2vh"}}>Total Violations: 9	</h4>
+                     </div>
+                </div>
+                <div className="col-md-2 col-xl-2 grid-margin stretch-card" style={{paddingTop:"5vh"}}>
+                     <div style={{display:"flex",flexDirection:"column",alignContent:"center",alignItems:"center",width:"100%",backgroundColor:"#4d4d4d",borderRadius:"5px"}}>
+                     <img alt="ship" 
+                      width={150} height={105} style={{borderRadius:"48px",border:"3px solid #fff",position:"absolute",top:"-6%"}}
+                      src={"https://media.istockphoto.com/photos/generic-cargo-container-ship-at-sea-picture-id591986620?k=6&m=591986620&s=612x612&w=0&h=tpGBHBC0sZmG_DMbPga2hgbII1B5iX9YfN3DDw3wrwE=" } />
+                      <h4 style={{textAlign:"center",marginTop:"10vh"}}>ADNOC 133</h4>
+                      <h4 style={{textAlign:"center",color:"#8d8d8d",paddingBottom:"2vh"}}>Total Violations: 23	</h4>
+                     </div>
+                </div>
+                <div className="col-md-2 col-xl-2 grid-margin stretch-card" style={{paddingTop:"5vh"}}>
+                     <div style={{display:"flex",flexDirection:"column",alignContent:"center",alignItems:"center",width:"100%",backgroundColor:"#4d4d4d",borderRadius:"5px"}}>
+                     <img alt="ship" 
+                      width={150} height={105} style={{borderRadius:"48px",border:"3px solid #fff",position:"absolute",top:"-6%"}}
+                      src={"https://images.theconversation.com/files/92281/original/image-20150818-12436-1y2qfys.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1050.0&fit=crop" } />
+                      <h4 style={{textAlign:"center",marginTop:"10vh"}}>ADNOC 002</h4>
+                      <h4 style={{textAlign:"center",color:"#8d8d8d",paddingBottom:"2vh"}}>Total Violations: 10	</h4>
+                     </div>
+                </div>
+                <div className="col-md-1 col-xl-1 grid-margin stretch-card" style={{padding:"20px",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                  <i className="mdi mdi-arrow-right" style={{fontSize:40}} ></i>
+                  </div>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="row">
           <div className="col-12 grid-margin">
             <div className="card">
@@ -340,7 +464,7 @@ options = {
                             </label>
                           </div> */}
                         </th>
-                        <th> S.NO </th>
+                        <th> Vessels Name </th>
                         <th> Detection Type </th>
                         <th> Image </th>
                         <th> Location </th>
@@ -358,12 +482,16 @@ options = {
                           </div> */}
                         </td>
                         <td>
-                          1
+                          <div style={{display:"flex"}}>
+                           <div><img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"http://www.marineinsight.com/wp-content/uploads/2017/06/Maersk-Madrid-1.jpg"} /></div> 
+                           <div style={{display:"flex",alignItems:"center",fontSize:18,marginLeft:"10px"}}>ADNOC 242</div>
+                          </div>
+                          
                         </td>
                         <td>
-                          <div className="badge badge-danger">Line Crossing</div>
+                          <div className="badge badge-danger">Man Overboard</div>
                         </td>
-                        <td> <img className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://theplanetd.com/images/travelling-by-cargo-ship-bow.jpg"} /> </td>
+                        <td> <img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://theplanetd.com/images/travelling-by-cargo-ship-bow.jpg"} /> </td>
                         <td><i className="mdi mdi-camcorder"></i> &nbsp;Cam 2</td>
                         <td> <p>10:33 AM</p>
                           <p>13 Mar 2021</p>
@@ -382,16 +510,19 @@ options = {
                           </div> */}
                         </td>
                         <td>
-                          2
+                        <div style={{display:"flex"}}>
+                           <div><img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8OjfwcQPIasYiisN-dEIIUiMwS2TXzWYfmg&usqp=CAU"} /></div> 
+                           <div style={{display:"flex",alignItems:"center",fontSize:18,marginLeft:"10px"}}>ADNOC 075</div>
+                          </div>
                           {/* <div className="d-flex">
                             <img src={require('../../assets/images/faces/face2.jpg')} alt="face" />
                             <span className="pl-2">Estella Bryan</span>
                           </div> */}
                         </td>
                         <td>
-                          <div className="badge badge-danger">Line Crossing</div>
+                          <div className="badge badge-warning">Line Crossing</div>
                         </td>
-                        <td> <img className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://i0.wp.com/asiatimes.com/wp-content/uploads/2019/10/Sabiti-Iranian-tanker-e1570863718332.jpg?fit=1200%2C905&ssl=1"} /> </td>
+                        <td> <img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://i0.wp.com/asiatimes.com/wp-content/uploads/2019/10/Sabiti-Iranian-tanker-e1570863718332.jpg?fit=1200%2C905&ssl=1"} /> </td>
                         <td><i className="mdi mdi-camcorder"></i> &nbsp;Cam 23</td>
                         <td> <p>10:33 AM</p>
                           <p>12 Mar 2021</p>
@@ -410,16 +541,19 @@ options = {
                           </div> */}
                         </td>
                         <td>
-                          3
+                        <div style={{display:"flex"}}>
+                           <div><img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://static7.depositphotos.com/1194815/682/i/600/depositphotos_6827071-stock-photo-container-ship.jpg"} /></div> 
+                           <div style={{display:"flex",alignItems:"center",fontSize:18,marginLeft:"10px"}}>ADNOC 125</div>
+                          </div>
                           {/* <div className="d-flex">
                             <img src={require('../../assets/images/faces/face5.jpg')} alt="face" />
                             <span className="pl-2">Lucy Abbott</span>
                           </div> */}
                         </td>
                         <td>
-                          <div className="badge badge-danger">Line Crossing</div>
+                          <div className="badge badge-danger">PPE Violation</div>
                         </td>
-                        <td> <img className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://www.marineinsight.com/wp-content/uploads/2015/11/tanker.jpg"} /> </td>
+                        <td> <img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://www.marineinsight.com/wp-content/uploads/2015/11/tanker.jpg"} /> </td>
                         <td><i className="mdi mdi-camcorder"></i> &nbsp;Cam 11</td>
                         <td> <p>1:13 AM</p>
                           <p>12 Mar 2021</p>
@@ -438,16 +572,19 @@ options = {
                           </div> */}
                         </td>
                         <td>
-                          4
+                        <div style={{display:"flex"}}>
+                           <div><img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREOQZ1n_U2g_pnaxZPYcvAerZfuLipGWfBVQ&usqp=CAU"} /></div> 
+                           <div style={{display:"flex",alignItems:"center",fontSize:18,marginLeft:"10px"}}>ADNOC 099</div>
+                          </div>2
                           {/* <div className="d-flex">
                             <img src={require('../../assets/images/faces/face3.jpg')} alt="face" />
                             <span className="pl-2">Peter Gill</span>
                           </div> */}
                         </td>
                         <td>
-                          <div className="badge badge-danger">Line Crossing</div>
+                          <div className="badge badge-danger">Slip or Fall</div>
                         </td>
-                        <td> <img className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://static01.nyt.com/images/2019/10/29/world/00seafarers-clip-promo/merlin_158889435_75be49ec-d41e-4f2c-93ce-4310f84575be-superJumbo.jpg"} /> </td>
+                        <td> <img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://static01.nyt.com/images/2019/10/29/world/00seafarers-clip-promo/merlin_158889435_75be49ec-d41e-4f2c-93ce-4310f84575be-superJumbo.jpg"} /> </td>
                         <td><i className="mdi mdi-camcorder"></i>&nbsp; Cam 7</td>
                         <td> <p>5:33 AM</p>
                           <p>14 Mar 2021</p>
@@ -465,16 +602,20 @@ options = {
                             </label>
                           </div> */}
                         </td>
-                        <td>5
+                        <td>
+                        <div style={{display:"flex"}}>
+                           <div><img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtobwnHDBSYR1k2wollGTSmKTaHPsRY5yRNw&usqp=CAU"} /></div> 
+                           <div style={{display:"flex",alignItems:"center",fontSize:18,marginLeft:"10px"}}>ADNOC 037</div>
+                          </div>
                           {/* <div className="d-flex">
                             <img src={require('../../assets/images/faces/face4.jpg')} alt="face" />
                             <span className="pl-2">Sallie Reyes</span>
                           </div> */}
                         </td>
                         <td>
-                          <div className="badge badge-danger">Line Crossing</div>
+                          <div className="badge badge-warning">Line Crossing</div>
                         </td>
-                        <td> <img className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTawjmyO3VHMWpXmo2Rs1O8ZAe-z83fX203UA&usqp=CAU"} /> </td>
+                        <td> <img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTawjmyO3VHMWpXmo2Rs1O8ZAe-z83fX203UA&usqp=CAU"} /> </td>
                         <td><i className="mdi mdi-camcorder"></i> &nbsp; Cam 8</td>
                         <td> <p>10:33 AM</p>
                           <p>04 Apr 2020</p>
@@ -629,7 +770,7 @@ options = {
 
 
 
-        <div className="row">
+        {/* <div className="row">
           <div className="col-md-12 col-xl-12 grid-margin stretch-card">
             <div className="card">
               <div className="card-body" >
@@ -640,15 +781,15 @@ options = {
               </div>
             </div>
           </div>
-          </div>
+          </div> */}
 
         <div className="row">
           <div className="col-md-6 col-xl-6 grid-margin stretch-card">
             <div className="card">
               <div className="card-body" >
-              <h4 className="card-title">Monthly Total Alerts</h4>
+                <h4 className="card-title">Monthly Total Alerts</h4>
                 <div className="d-flex flex-row " >
-                <Bar  data={this.detectionsData} options={this.options} height={100} />
+                  <Bar data={this.detectionsData} options={this.options} height={100} />
                 </div>
               </div>
             </div>
@@ -658,14 +799,14 @@ options = {
               <div className="card-body" >
                 <h4 className="card-title">Monthly line crossing detections</h4>
                 <div className="d-flex flex-row " >
-                <Line  data={this.detectionsData} options={this.options} height={100} />
+                  <Line data={this.detectionsData} options={this.options} height={100} />
                 </div>
               </div>
             </div>
           </div>
-          </div>
+        </div>
 
-          {/* <div className="row">
+        {/* <div className="row">
             <div className="col-md-6 col-xl-4 grid-margin stretch-card">
               <div className="card">
                 <div className="card-body">
@@ -783,101 +924,101 @@ options = {
               </div>
             </div>
           </div> */}
-          <div className="row">
-            <div className="col-12">
-              <div className="card">
-                <div className="card-body">
-                  <h4 className="card-title">Active vessels</h4>
-                  <div className="row">
-                    <div className="col-md-5">
-                      <div className="table-responsive">
-                        <table className="table">
-                          <tbody>
-                            <tr>
-                              <th>Name</th>
-                              <th>Country</th>
-                              <th>Range</th>
-                              <th>Accuracy</th>
-                            </tr>
-                            <tr>
-                              <td>
-                                Scottya Prince
+        <div className="row">
+          <div className="col-12">
+            <div className="card">
+              <div className="card-body">
+                <h4 className="card-title">Active vessels</h4>
+                <div className="row">
+                  <div className="col-md-5">
+                    <div className="table-responsive">
+                      <table className="table">
+                        <tbody>
+                          <tr>
+                            <th>Name</th>
+                            <th>Country</th>
+                            <th>Range</th>
+                            <th>Accuracy</th>
+                          </tr>
+                          <tr>
+                            <td>
+                             ADNOC 323
                               </td>
-                              <td>USA</td>
-                              <td className="text-right"> 1500 </td>
-                              <td className="text-right font-weight-medium"> 56.35% </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                Metaberg 235
+                            <td>USA</td>
+                            <td className="text-right"> 1500 </td>
+                            <td className="text-right font-weight-medium"> 56.35% </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              ADNOC 235
                               </td>
-                              <td>Germany</td>
-                              <td className="text-right"> 800 </td>
-                              <td className="text-right font-weight-medium"> 33.25% </td>
-                            </tr>
-                            <tr>
-                              <td>GNM 336
+                            <td>Germany</td>
+                            <td className="text-right"> 800 </td>
+                            <td className="text-right font-weight-medium"> 33.25% </td>
+                          </tr>
+                          <tr>
+                            <td>ADNOC 336
                               </td>
-                              <td>Australia</td>
-                              <td className="text-right"> 760 </td>
-                              <td className="text-right font-weight-medium"> 15.45% </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                Mercury SF3
+                            <td>Australia</td>
+                            <td className="text-right"> 760 </td>
+                            <td className="text-right font-weight-medium"> 15.45% </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              ADNOC 002
                               </td>
-                              <td>United Kingdom</td>
-                              <td className="text-right"> 450 </td>
-                              <td className="text-right font-weight-medium"> 25.00% </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                Cargo nation SFSR
+                            <td>United Kingdom</td>
+                            <td className="text-right"> 450 </td>
+                            <td className="text-right font-weight-medium"> 25.00% </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              ADNOC 133
                               </td>
-                              <td>Romania</td>
-                              <td className="text-right"> 620 </td>
-                              <td className="text-right font-weight-medium"> 10.25% </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                Bobra casstle 01
+                            <td>Romania</td>
+                            <td className="text-right"> 620 </td>
+                            <td className="text-right font-weight-medium"> 10.25% </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              ADNOC 023
                               </td>
-                              <td>Brasil</td>
-                              <td className="text-right"> 230 </td>
-                              <td className="text-right font-weight-medium"> 75.00% </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                            <td>Brasil</td>
+                            <td className="text-right"> 230 </td>
+                            <td className="text-right font-weight-medium"> 75.00% </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
-                    <div className="col-md-7">
-                      <div id="audience-map" className="vector-map"></div>
-                      <VectorMap
-                        map={"world_mill"}
-                        backgroundColor="transparent" //change it to ocean blue: #0077be
-                        panOnDrag={true}
-                        containerClassName="dashboard-vector-map"
-                        focusOn={{
-                          x: 0.5,
-                          y: 0.5,
-                          scale: 1,
-                          animate: true
-                        }}
-                        series={{
-                          regions: [{
-                            scale: ['#3d3c3c', '#f2f2f2'],
-                            normalizeFunction: 'polynomial',
-                            values: mapData
-                          }]
-                        }}
-                      />
-                    </div>
+                  </div>
+                  <div className="col-md-7">
+                    <div id="audience-map" className="vector-map"></div>
+                    <VectorMap
+                      map={"world_mill"}
+                      backgroundColor="transparent" //change it to ocean blue: #0077be
+                      panOnDrag={true}
+                      containerClassName="dashboard-vector-map"
+                      focusOn={{
+                        x: 0.5,
+                        y: 0.5,
+                        scale: 1,
+                        animate: true
+                      }}
+                      series={{
+                        regions: [{
+                          scale: ['#3d3c3c', '#f2f2f2'],
+                          normalizeFunction: 'polynomial',
+                          values: mapData
+                        }]
+                      }}
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div> 
+        </div>
+      </div>
     );
   }
 }
