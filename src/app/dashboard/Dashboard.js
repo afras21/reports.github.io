@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import { Doughnut } from 'react-chartjs-2';
-import Slider from "react-slick";
-import { TodoListComponent } from '../apps/TodoList'
+import React, { Component, } from 'react';
+//import { Doughnut } from 'react-chartjs-2';
+//import Slider from "react-slick";
+//import { TodoListComponent } from '../apps/TodoList'
 import { VectorMap } from "react-jvectormap"
 import { Line, Bar } from 'react-chartjs-2';
+import { randomNumber } from '../../utils/random';
 
 const mapData = {
   "BZ": 75.00,
@@ -14,59 +15,56 @@ const mapData = {
   "GE": 33.25
 }
 
+
+
 export class Dashboard extends Component {
 
-  data = {
-    labels: ["", "", "", "", "", "", "", ""],
-    datasets: [{
-      label: 'ADNOC 212',
-      data: [100, 190, -120, 150, 270, 230, -100, 130,-300,400],
-      backgroundColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-        'rgba(111, 34, 64, 1)',
-        'rgba(243, 34, 64, 1)',
-      ],
-      
-      borderWidth: 1,
-      fill: false
-    }]
-  };
-  detectionsData = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [{
-      label: '# of Votes',
-      data: [12, 1, 6, 7, 22, 23, 10, 8, 5, 22, 13, 15],
-      backgroundColor: [
-        'rgba(255, 99, 132,1)',
-        'rgba(54, 162, 235,1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-        'rgba(255, 22, 64, 1)',
-        'rgba(255, 67, 22, 1)',
-        'rgba(255, 111, 22, 1)',
-        'rgba(255, 222, 22, 1)',
-        'rgba(34, 213, 22, 1)',
-        'rgba(34, 169, 22, 1)',
-      ],
-      borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
-      borderWidth: 1,
-      fill: false
-    }]
-  };
+  constructor(props) {
+    super(props);
+
+    this.generateRandomData = this.generateRandomData.bind(this);
+
+  }
+  state = {
+    time : new Date(),
+    randomData: [100, 190, -120, 150, 270, 230, -100, 130, -300, 400],
+    data: {
+      labels: ["", "", "", "", "", "", "", ""],
+      datasets: [{
+        label: 'ADNOC 212',
+        data: [Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000)],
+        backgroundColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(111, 34, 64, 1)',
+          'rgba(243, 34, 64, 1)',
+        ],
+
+        borderWidth: 1,
+        fill: false
+      }]
+    }
+  }
+  componentDidMount() {
+    let time = 5000 //5s
+    setInterval(this.generateRandomData, time)
+    console.log(this.state.data)
+  }
+
+
+  generateRandomData() {
+    let arr = [];
+    for (let index = 0; index < 10; index++) {
+      arr.push(randomNumber(-300, 300))
+    }
+    this.setState({
+      randomData: [...arr]
+    });
+  }
 
   options = {
     scales: {
@@ -143,10 +141,10 @@ export class Dashboard extends Component {
                 <div className="row">
                   <div className="col-8 col-sm-12 col-xl-8 my-auto">
                     <div className="d-flex d-sm-block d-md-flex align-items-center">
-                      <h2 className="mb-0">101</h2>
-                      <p className="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
+                      <h2 className="mb-0">{randomNumber(40,100)}</h2>
+                      <p className="text-success ml-2 mb-0 font-weight-medium">+{(Math.random()*5).toFixed(2)}%</p>
                     </div>
-                    <h6 className="text-muted font-weight-normal">11.38% Since last month</h6>
+                    <h6 className="text-muted font-weight-normal">{(Math.random()*18).toFixed(2)}% Since last month</h6>
                   </div>
                   <div className="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
                     <i className="icon-lg mdi mdi-alert text-danger ml-auto"></i>
@@ -162,10 +160,10 @@ export class Dashboard extends Component {
                 <div className="row">
                   <div className="col-8 col-sm-12 col-xl-8 my-auto">
                     <div className="d-flex d-sm-block d-md-flex align-items-center">
-                      <h2 className="mb-0">12</h2>
-                      <p className="text-success ml-2 mb-0 font-weight-medium">+8.3%</p>
+                      <h2 className="mb-0">{randomNumber(10,888)}</h2>
+                      <p className="text-success ml-2 mb-0 font-weight-medium">+{(Math.random()*13).toFixed(2)}%</p>
                     </div>
-                    <h6 className="text-muted font-weight-normal"> 9.61% Since last month</h6>
+                    <h6 className="text-muted font-weight-normal"> {(Math.random()*16).toFixed(2)}% Since last month</h6>
                   </div>
                   <div className="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
                     <i className="icon-lg mdi mdi-odnoklassniki text-primary ml-auto"></i>
@@ -181,14 +179,14 @@ export class Dashboard extends Component {
                 <div className="row">
                   <div className="col-8 col-sm-12 col-xl-8 my-auto">
                     <div className="d-flex d-sm-block d-md-flex align-items-center">
-                      <h2 className="mb-0">1</h2>
-                      <p className="text-danger ml-2 mb-0 font-weight-medium">-2.1% </p>
+                      <h2 className="mb-0">{randomNumber(2,20)}</h2>
+                      <p className="text-danger ml-2 mb-0 font-weight-medium">-{(Math.random()*5).toFixed(2)}% </p>
                     </div>
-                    <h6 className="text-muted font-weight-normal">2.27% Since last month</h6>
+                    <h6 className="text-muted font-weight-normal">{(Math.random()*5).toFixed(2)}% Since last month</h6>
                   </div>
                   <div className="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
                     {/* <i className="icon-lg mdi mdi-monitor text-danger ml-auto"></i> */}
-                    <img width={80} height={90} src={require("../../assets/images/fall.png")} />
+                    <img alt="fall" width={80} height={90} src={require("../../assets/images/fall.png")} />
                   </div>
                 </div>
               </div>
@@ -201,10 +199,10 @@ export class Dashboard extends Component {
                 <div className="row">
                   <div className="col-8 col-sm-12 col-xl-8 my-auto">
                     <div className="d-flex d-sm-block d-md-flex align-items-center">
-                      <h2 className="mb-0">18</h2>
-                      <p className="text-danger ml-2 mb-0 font-weight-medium">-2.1% </p>
+                      <h2 className="mb-0">{randomNumber(3,19)}</h2>
+                      <p className="text-danger ml-2 mb-0 font-weight-medium">-{(Math.random()*7).toFixed(2)}% </p>
                     </div>
-                    <h6 className="text-muted font-weight-normal">2.27% Since last month</h6>
+                    <h6 className="text-muted font-weight-normal">{(Math.random()*6).toFixed(2)}% Since last month</h6>
                   </div>
                   <div className="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
 
@@ -320,7 +318,7 @@ export class Dashboard extends Component {
      */}
 
         <div className="row">
-          <div className="col-md-7 col-xl-7 grid-margin stretch-card">
+          <div className="col-md-12 col-lg-7 col-xl-7 grid-margin stretch-card">
             <div className="card">
               <div className="card-body" >
                 <h4 className="card-title">PPE Detections</h4>
@@ -331,41 +329,62 @@ export class Dashboard extends Component {
                     <p style={{ marginLeft: "20px" }}>Life Jackets</p>
                     <button type="button" className="btn btn-outline-success" style={{ color: "#fff", marginLeft: "20px" }}>
                       Helmets
-                  </button>
+                    </button>
                     <div style={{ backgroundColor: "#4d4d4d", marginTop: "5vh", padding: "20px", display: "flex", borderRadius: "6px" }}>
                       <div style={{ width: "70%" }}>
                         <p style={{ fontSize: 20, color: "#d1d1d1" }}>Violations</p>
                         <p style={{ marginTop: "-2vh", color: "#d1d1d1" }}>Total</p>
                       </div>
                       <div>
-                        <p style={{ fontSize: 50 }}>07</p>
+                        <p style={{ fontSize: 50 }}>{randomNumber(3,19)}</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="col-md-4 col-xl-4 grid-margin" style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
-                    <img width={200} src={require("../../assets/images/helmet.png")} />
+                  <div className="col-md-4 col-xl-4 grid-margin" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <img alt="helmet" width={170} src={require("../../assets/images/helmet.png")} />
                   </div>
                   <div className="col-md-3 col-xl-3 grid-margin">
                     <h3 >Helmet Violations</h3> <br />
                     <h5 >Time</h5>
-                    <p style={{ color: "#d3d3d3" }}>11:34 AM</p>
+                    <p style={{ color: "#d3d3d3" }}>{this.state.time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</p>
                     <h5 >Date</h5>
-                    <p style={{ color: "#d3d3d3" }}>24/03/2021</p>
+                    <p style={{ color: "#d3d3d3" }}>{this.state.time.getDate() + "/"+ parseInt(this.state.time.getMonth()+1) +"/"+this.state.time.getFullYear()}</p>
                     <h5 >No of Violations</h5>
-                    <h4 style={{ color: "#d3d3d3" }}>04</h4>
+                    <h4 style={{ color: "#d3d3d3" }}>{randomNumber(1,6)}</h4>
                   </div>
 
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-md-5 col-xl-5 grid-margin stretch-card">
+          <div className="col-md-12 col-lg-5 col-xl-5 grid-margin stretch-card">
             <div className="card">
               <div className="card-body" >
                 <h4 className="card-title">Critical Swell Level Detections</h4>
                 <div className="d-flex flex-row " >
-                  <Bar data={this.data} options={this.options} />
+                  <Bar data={
+                    {
+                      labels: ["", "", "", "", "", "", "", ""],
+                      datasets: [{
+                        label: 'ADNOC 212',
+                        data: [randomNumber(-400,400), randomNumber(-400,400), randomNumber(-400,400), randomNumber(-400,400), randomNumber(-400,400), randomNumber(-400,400), randomNumber(-400,400), randomNumber(-400,400), randomNumber(-400,400)],
+                        backgroundColor: [
+                          'rgba(255, 99, 132, 1)',
+                          'rgba(54, 162, 235, 1)',
+                          'rgba(255, 206, 86, 1)',
+                          'rgba(75, 192, 192, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)',
+                          'rgba(111, 34, 64, 1)',
+                        ],
+
+                        borderWidth: 1,
+                        fill: false
+                      }]
+                    }
+                  } options={this.options}
+                  height={"100%"} />
                 </div>
               </div>
             </div>
@@ -376,72 +395,72 @@ export class Dashboard extends Component {
           <div className="col-12 grid-margin">
             <div className="card">
               <div className="card-body">
-                <div style={{position:"relative",display:"flex"}}>
-                <h4 className="card-title">Highest Violations</h4>
-                <div style={{position:"absolute",right:0,display:"flex"}}>
-                <p style={{margin:"0 10px",padding:"5px"}}>Today</p>
-                <p style={{margin:"0 10px",padding:"5px"}}>Month</p>
-                <p style={{margin:"0 10px",padding:"5px"}}>Year</p>
-                <p style={{margin:"0 10px",backgroundColor:"whitesmoke",padding:"5px",color:"#000",borderRadius:"6px"}}>Today :Jul 24</p>
-                </div>
-                </div>
-                <div className="row" style={{paddingTop:"4vh"}}> 
-                <div className="col-md-1 col-xl-1 grid-margin stretch-card" style={{padding:"20px",display:"flex",alignItems:"center",justifyContent:"center"}}>
-                  <i className="mdi mdi-arrow-left" style={{fontSize:40}} ></i>
+                <div style={{ position: "relative", display: "flex" }}>
+                  <h4 className="card-title">Highest Violations</h4>
+                  <div style={{ position: "absolute", right: 0, display: "flex" }}>
+                    <p style={{ margin: "0 10px", padding: "5px" }}>Today</p>
+                    <p style={{ margin: "0 10px", padding: "5px" }}>Month</p>
+                    <p style={{ margin: "0 10px", padding: "5px" }}>Year</p>
+                    <p style={{ margin: "0 10px", backgroundColor: "whitesmoke", padding: "5px", color: "#000", borderRadius: "6px" }}>Today :Jul 24</p>
                   </div>
-                <div className="col-md-2 col-xl-2 grid-margin stretch-card" style={{alignItems:"center",justifyContent:"center",alignContent:"center",paddingTop:"5vh"}}>
-                     <div style={{display:"flex",flexDirection:"column",alignContent:"center",alignItems:"center",width:"100%",backgroundColor:"#4d4d4d",borderRadius:"5px"}}>
-                     <img alt="ship" 
-                      width={150} height={105} style={{borderRadius:"48px",border:"3px solid #fff",position:"absolute",top:"-6%"}}
-                      src={"https://www.wqis.com/wp-content/uploads/2020/07/Cargo-Shipping-Industry.jpg" } />
-                      
-                      <h4 style={{textAlign:"center",marginTop:"10vh"}}>ADH0C 323	</h4>
-                      <h4 style={{textAlign:"center",color:"#8d8d8d",paddingBottom:"2vh"}}>Total Violations: 12	</h4>
-                     
-                     </div>
                 </div>
-                <div className="col-md-2 col-xl-2 grid-margin stretch-card" style={{paddingTop:"5vh"}}>
-                     <div style={{display:"flex",flexDirection:"column",alignContent:"center",alignItems:"center",width:"100%",backgroundColor:"#4d4d4d",borderRadius:"5px"}}>
-                     <img alt="ship" 
-                      width={150} height={105} style={{borderRadius:"48px",border:"3px solid #fff",position:"absolute",top:"-6%"}}
-                      src={"https://images.theconversation.com/files/392892/original/file-20210331-15-18mw6wt.jpeg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=675.0&fit=crop" } />
-                      
-                      <h4 style={{textAlign:"center",marginTop:"10vh"}}>ADH0C 323	</h4>
-                      <h4 style={{textAlign:"center",color:"#8d8d8d",paddingBottom:"2vh"}}>Total Violations: 12	</h4>
-                     
-                     </div>
-                </div>
-                <div className="col-md-2 col-xl-2 grid-margin stretch-card" style={{paddingTop:"5vh"}}>
-                     <div style={{display:"flex",flexDirection:"column",alignContent:"center",alignItems:"center",width:"100%",backgroundColor:"#4d4d4d",borderRadius:"5px"}}>
-                     <img alt="ship" 
-                      width={150} height={105} style={{borderRadius:"48px",border:"3px solid #fff",position:"absolute",top:"-6%"}}
-                      src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZbWWW0L0mSjeggLBO5wQRpe-V9PWYxUCsPFi6m0HUi9NnjwxNb5u5sXO2psqXSfJlbIQ&usqp=CAU" } />
-                      <h4 style={{textAlign:"center",marginTop:"10vh"}}>ADNOC 336</h4>
-                      <h4 style={{textAlign:"center",color:"#8d8d8d",paddingBottom:"2vh"}}>Total Violations: 9	</h4>
-                     </div>
-                </div>
-                <div className="col-md-2 col-xl-2 grid-margin stretch-card" style={{paddingTop:"5vh"}}>
-                     <div style={{display:"flex",flexDirection:"column",alignContent:"center",alignItems:"center",width:"100%",backgroundColor:"#4d4d4d",borderRadius:"5px"}}>
-                     <img alt="ship" 
-                      width={150} height={105} style={{borderRadius:"48px",border:"3px solid #fff",position:"absolute",top:"-6%"}}
-                      src={"https://media.istockphoto.com/photos/generic-cargo-container-ship-at-sea-picture-id591986620?k=6&m=591986620&s=612x612&w=0&h=tpGBHBC0sZmG_DMbPga2hgbII1B5iX9YfN3DDw3wrwE=" } />
-                      <h4 style={{textAlign:"center",marginTop:"10vh"}}>ADNOC 133</h4>
-                      <h4 style={{textAlign:"center",color:"#8d8d8d",paddingBottom:"2vh"}}>Total Violations: 23	</h4>
-                     </div>
-                </div>
-                <div className="col-md-2 col-xl-2 grid-margin stretch-card" style={{paddingTop:"5vh"}}>
-                     <div style={{display:"flex",flexDirection:"column",alignContent:"center",alignItems:"center",width:"100%",backgroundColor:"#4d4d4d",borderRadius:"5px"}}>
-                     <img alt="ship" 
-                      width={150} height={105} style={{borderRadius:"48px",border:"3px solid #fff",position:"absolute",top:"-6%"}}
-                      src={"https://images.theconversation.com/files/92281/original/image-20150818-12436-1y2qfys.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1050.0&fit=crop" } />
-                      <h4 style={{textAlign:"center",marginTop:"10vh"}}>ADNOC 002</h4>
-                      <h4 style={{textAlign:"center",color:"#8d8d8d",paddingBottom:"2vh"}}>Total Violations: 10	</h4>
-                     </div>
-                </div>
-                <div className="col-md-1 col-xl-1 grid-margin stretch-card" style={{padding:"20px",display:"flex",alignItems:"center",justifyContent:"center"}}>
-                  <i className="mdi mdi-arrow-right" style={{fontSize:40}} ></i>
+                <div className="row" style={{ paddingTop: "4vh" }}>
+                  <div className="col-md-1 col-xl-1 grid-margin stretch-card" style={{ padding: "20px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <i className="mdi mdi-arrow-left" style={{ fontSize: 40 }} ></i>
                   </div>
-                
+                  <div className="col-md-2 col-xl-2 grid-margin stretch-card" style={{ alignItems: "center", justifyContent: "center", alignContent: "center", paddingTop: "5vh" }}>
+                    <div style={{ display: "flex", flexDirection: "column", alignContent: "center", alignItems: "center", width: "100%", backgroundColor: "#4d4d4d", borderRadius: "5px" }}>
+                      <img alt="ship"
+                        width={150} height={105} style={{ borderRadius: "48px", border: "3px solid #fff", position: "absolute", top: "-6%" }}
+                        src={"https://www.wqis.com/wp-content/uploads/2020/07/Cargo-Shipping-Industry.jpg"} />
+
+                      <h4 style={{ textAlign: "center", marginTop: "10vh" }}>ADH0C 323	</h4>
+                      <h4 style={{ textAlign: "center", color: "#8d8d8d", paddingBottom: "2vh" }}>Total Violations: 12	</h4>
+
+                    </div>
+                  </div>
+                  <div className="col-md-2 col-xl-2 grid-margin stretch-card" style={{ paddingTop: "5vh" }}>
+                    <div style={{ display: "flex", flexDirection: "column", alignContent: "center", alignItems: "center", width: "100%", backgroundColor: "#4d4d4d", borderRadius: "5px" }}>
+                      <img alt="ship"
+                        width={150} height={105} style={{ borderRadius: "48px", border: "3px solid #fff", position: "absolute", top: "-6%" }}
+                        src={"https://images.theconversation.com/files/392892/original/file-20210331-15-18mw6wt.jpeg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=675.0&fit=crop"} />
+
+                      <h4 style={{ textAlign: "center", marginTop: "10vh" }}>ADH0C 323	</h4>
+                      <h4 style={{ textAlign: "center", color: "#8d8d8d", paddingBottom: "2vh" }}>Total Violations: 12	</h4>
+
+                    </div>
+                  </div>
+                  <div className="col-md-2 col-xl-2 grid-margin stretch-card" style={{ paddingTop: "5vh" }}>
+                    <div style={{ display: "flex", flexDirection: "column", alignContent: "center", alignItems: "center", width: "100%", backgroundColor: "#4d4d4d", borderRadius: "5px" }}>
+                      <img alt="ship"
+                        width={150} height={105} style={{ borderRadius: "48px", border: "3px solid #fff", position: "absolute", top: "-6%" }}
+                        src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZbWWW0L0mSjeggLBO5wQRpe-V9PWYxUCsPFi6m0HUi9NnjwxNb5u5sXO2psqXSfJlbIQ&usqp=CAU"} />
+                      <h4 style={{ textAlign: "center", marginTop: "10vh" }}>ADNOC 336</h4>
+                      <h4 style={{ textAlign: "center", color: "#8d8d8d", paddingBottom: "2vh" }}>Total Violations: 9	</h4>
+                    </div>
+                  </div>
+                  <div className="col-md-2 col-xl-2 grid-margin stretch-card" style={{ paddingTop: "5vh" }}>
+                    <div style={{ display: "flex", flexDirection: "column", alignContent: "center", alignItems: "center", width: "100%", backgroundColor: "#4d4d4d", borderRadius: "5px" }}>
+                      <img alt="ship"
+                        width={150} height={105} style={{ borderRadius: "48px", border: "3px solid #fff", position: "absolute", top: "-6%" }}
+                        src={"https://media.istockphoto.com/photos/generic-cargo-container-ship-at-sea-picture-id591986620?k=6&m=591986620&s=612x612&w=0&h=tpGBHBC0sZmG_DMbPga2hgbII1B5iX9YfN3DDw3wrwE="} />
+                      <h4 style={{ textAlign: "center", marginTop: "10vh" }}>ADNOC 133</h4>
+                      <h4 style={{ textAlign: "center", color: "#8d8d8d", paddingBottom: "2vh" }}>Total Violations: 23	</h4>
+                    </div>
+                  </div>
+                  <div className="col-md-2 col-xl-2 grid-margin stretch-card" style={{ paddingTop: "5vh" }}>
+                    <div style={{ display: "flex", flexDirection: "column", alignContent: "center", alignItems: "center", width: "100%", backgroundColor: "#4d4d4d", borderRadius: "5px" }}>
+                      <img alt="ship"
+                        width={150} height={105} style={{ borderRadius: "48px", border: "3px solid #fff", position: "absolute", top: "-6%" }}
+                        src={"https://images.theconversation.com/files/92281/original/image-20150818-12436-1y2qfys.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1050.0&fit=crop"} />
+                      <h4 style={{ textAlign: "center", marginTop: "10vh" }}>ADNOC 002</h4>
+                      <h4 style={{ textAlign: "center", color: "#8d8d8d", paddingBottom: "2vh" }}>Total Violations: 10	</h4>
+                    </div>
+                  </div>
+                  <div className="col-md-1 col-xl-1 grid-margin stretch-card" style={{ padding: "20px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <i className="mdi mdi-arrow-right" style={{ fontSize: 40 }} ></i>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -482,11 +501,11 @@ export class Dashboard extends Component {
                           </div> */}
                         </td>
                         <td>
-                          <div style={{display:"flex"}}>
-                           <div><img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"http://www.marineinsight.com/wp-content/uploads/2017/06/Maersk-Madrid-1.jpg"} /></div> 
-                           <div style={{display:"flex",alignItems:"center",fontSize:18,marginLeft:"10px"}}>ADNOC 242</div>
+                          <div style={{ display: "flex" }}>
+                            <div><img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"http://www.marineinsight.com/wp-content/uploads/2017/06/Maersk-Madrid-1.jpg"} /></div>
+                            <div style={{ display: "flex", alignItems: "center", fontSize: 18, marginLeft: "10px" }}>ADNOC 242</div>
                           </div>
-                          
+
                         </td>
                         <td>
                           <div className="badge badge-danger">Man Overboard</div>
@@ -510,9 +529,9 @@ export class Dashboard extends Component {
                           </div> */}
                         </td>
                         <td>
-                        <div style={{display:"flex"}}>
-                           <div><img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8OjfwcQPIasYiisN-dEIIUiMwS2TXzWYfmg&usqp=CAU"} /></div> 
-                           <div style={{display:"flex",alignItems:"center",fontSize:18,marginLeft:"10px"}}>ADNOC 075</div>
+                          <div style={{ display: "flex" }}>
+                            <div><img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8OjfwcQPIasYiisN-dEIIUiMwS2TXzWYfmg&usqp=CAU"} /></div>
+                            <div style={{ display: "flex", alignItems: "center", fontSize: 18, marginLeft: "10px" }}>ADNOC 075</div>
                           </div>
                           {/* <div className="d-flex">
                             <img src={require('../../assets/images/faces/face2.jpg')} alt="face" />
@@ -541,9 +560,9 @@ export class Dashboard extends Component {
                           </div> */}
                         </td>
                         <td>
-                        <div style={{display:"flex"}}>
-                           <div><img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://static7.depositphotos.com/1194815/682/i/600/depositphotos_6827071-stock-photo-container-ship.jpg"} /></div> 
-                           <div style={{display:"flex",alignItems:"center",fontSize:18,marginLeft:"10px"}}>ADNOC 125</div>
+                          <div style={{ display: "flex" }}>
+                            <div><img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://static7.depositphotos.com/1194815/682/i/600/depositphotos_6827071-stock-photo-container-ship.jpg"} /></div>
+                            <div style={{ display: "flex", alignItems: "center", fontSize: 18, marginLeft: "10px" }}>ADNOC 125</div>
                           </div>
                           {/* <div className="d-flex">
                             <img src={require('../../assets/images/faces/face5.jpg')} alt="face" />
@@ -572,9 +591,9 @@ export class Dashboard extends Component {
                           </div> */}
                         </td>
                         <td>
-                        <div style={{display:"flex"}}>
-                           <div><img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREOQZ1n_U2g_pnaxZPYcvAerZfuLipGWfBVQ&usqp=CAU"} /></div> 
-                           <div style={{display:"flex",alignItems:"center",fontSize:18,marginLeft:"10px"}}>ADNOC 099</div>
+                          <div style={{ display: "flex" }}>
+                            <div><img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREOQZ1n_U2g_pnaxZPYcvAerZfuLipGWfBVQ&usqp=CAU"} /></div>
+                            <div style={{ display: "flex", alignItems: "center", fontSize: 18, marginLeft: "10px" }}>ADNOC 099</div>
                           </div>2
                           {/* <div className="d-flex">
                             <img src={require('../../assets/images/faces/face3.jpg')} alt="face" />
@@ -603,9 +622,9 @@ export class Dashboard extends Component {
                           </div> */}
                         </td>
                         <td>
-                        <div style={{display:"flex"}}>
-                           <div><img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtobwnHDBSYR1k2wollGTSmKTaHPsRY5yRNw&usqp=CAU"} /></div> 
-                           <div style={{display:"flex",alignItems:"center",fontSize:18,marginLeft:"10px"}}>ADNOC 037</div>
+                          <div style={{ display: "flex" }}>
+                            <div><img alt="camera 8" className="img-lg" style={{ width: "100px", height: "60px", borderRadius: "5%" }} width={"100px"} height={"100px"} src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtobwnHDBSYR1k2wollGTSmKTaHPsRY5yRNw&usqp=CAU"} /></div>
+                            <div style={{ display: "flex", alignItems: "center", fontSize: 18, marginLeft: "10px" }}>ADNOC 037</div>
                           </div>
                           {/* <div className="d-flex">
                             <img src={require('../../assets/images/faces/face4.jpg')} alt="face" />
@@ -789,7 +808,37 @@ export class Dashboard extends Component {
               <div className="card-body" >
                 <h4 className="card-title">Monthly Total Alerts</h4>
                 <div className="d-flex flex-row " >
-                  <Bar data={this.detectionsData} options={this.options} height={100} />
+                  <Bar data={{
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    datasets: [{
+                      label: '# of Votes',
+                      data: [randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20)],
+                      backgroundColor: [
+                        'rgba(255, 99, 132,1)',
+                        'rgba(54, 162, 235,1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 22, 64, 1)',
+                        'rgba(255, 67, 22, 1)',
+                        'rgba(255, 111, 22, 1)',
+                        'rgba(255, 222, 22, 1)',
+                        'rgba(34, 213, 22, 1)',
+                        'rgba(34, 169, 22, 1)',
+                      ],
+                      borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1,
+                      fill: false
+                    }]
+                  }} options={this.options} height={100} />
                 </div>
               </div>
             </div>
@@ -799,7 +848,39 @@ export class Dashboard extends Component {
               <div className="card-body" >
                 <h4 className="card-title">Monthly line crossing detections</h4>
                 <div className="d-flex flex-row " >
-                  <Line data={this.detectionsData} options={this.options} height={100} />
+                  <Line 
+                  data={{
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    datasets: [{
+                      label: '# of Votes',
+                      data: [randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20), randomNumber(2, 20)],
+                      backgroundColor: [
+                        'rgba(255, 99, 132,1)',
+                        'rgba(54, 162, 235,1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 22, 64, 1)',
+                        'rgba(255, 67, 22, 1)',
+                        'rgba(255, 111, 22, 1)',
+                        'rgba(255, 222, 22, 1)',
+                        'rgba(34, 213, 22, 1)',
+                        'rgba(34, 169, 22, 1)',
+                      ],
+                      borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1,
+                      fill: false
+                    }]
+                  }}
+                  options={this.options} height={100} />
                 </div>
               </div>
             </div>
@@ -942,50 +1023,50 @@ export class Dashboard extends Component {
                           </tr>
                           <tr>
                             <td>
-                             ADNOC 323
-                              </td>
+                              ADNOC 323
+                            </td>
                             <td>USA</td>
-                            <td className="text-right"> 1500 </td>
-                            <td className="text-right font-weight-medium"> 56.35% </td>
+                            <td className="text-right"> {randomNumber(200,1000)} </td>
+                            <td className="text-right font-weight-medium"> {(Math.random()*88).toFixed(2)}% </td>
                           </tr>
                           <tr>
                             <td>
                               ADNOC 235
-                              </td>
+                            </td>
                             <td>Germany</td>
-                            <td className="text-right"> 800 </td>
-                            <td className="text-right font-weight-medium"> 33.25% </td>
+                            <td className="text-right"> {randomNumber(200,1000)}</td>
+                            <td className="text-right font-weight-medium"> {(Math.random()*88).toFixed(2)}% </td>
                           </tr>
                           <tr>
                             <td>ADNOC 336
-                              </td>
+                            </td>
                             <td>Australia</td>
-                            <td className="text-right"> 760 </td>
-                            <td className="text-right font-weight-medium"> 15.45% </td>
+                            <td className="text-right"> {randomNumber(200,1000)}</td>
+                            <td className="text-right font-weight-medium"> {(Math.random()*88).toFixed(2)}% </td>
                           </tr>
                           <tr>
                             <td>
                               ADNOC 002
-                              </td>
+                            </td>
                             <td>United Kingdom</td>
-                            <td className="text-right"> 450 </td>
-                            <td className="text-right font-weight-medium"> 25.00% </td>
+                            <td className="text-right"> {randomNumber(200,1000)}</td>
+                            <td className="text-right font-weight-medium"> {(Math.random()*88).toFixed(2)}% </td>
                           </tr>
                           <tr>
                             <td>
                               ADNOC 133
-                              </td>
+                            </td>
                             <td>Romania</td>
-                            <td className="text-right"> 620 </td>
-                            <td className="text-right font-weight-medium"> 10.25% </td>
+                            <td className="text-right"> {randomNumber(200,1000)}</td>
+                            <td className="text-right font-weight-medium"> {(Math.random()*88).toFixed(2)}% </td>
                           </tr>
                           <tr>
                             <td>
                               ADNOC 023
-                              </td>
+                            </td>
                             <td>Brasil</td>
-                            <td className="text-right"> 230 </td>
-                            <td className="text-right font-weight-medium"> 75.00% </td>
+                            <td className="text-right"> {randomNumber(200,1000)}</td>
+                            <td className="text-right font-weight-medium"> {(Math.random()*88).toFixed(2)}% </td>
                           </tr>
                         </tbody>
                       </table>
